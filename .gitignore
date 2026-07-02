@@ -35,3 +35,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Secrets — 실제 키가 담긴 설정은 커밋 금지 (.example 템플릿만 커밋) ###
+src/main/resources/application.properties
+src/main/resources/application-local.properties
+src/main/resources/application-secret.properties
+!src/main/resources/application.properties.example
+!src/main/resources/application-postgres.properties
+*.env
+.env
