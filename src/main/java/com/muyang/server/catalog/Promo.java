@@ -36,4 +36,7 @@ public class Promo {
 
     /** 배너 테마: navy | cream */
     private String theme;
+
+    /** 배너 이미지 */
+    private String imageUrl;
 }

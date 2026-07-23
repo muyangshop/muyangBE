@@ -38,6 +38,7 @@ public class Sku {
     private double rating;
     private int reviews;
     private String ph;
+    private String imageUrl;
 
     /** 목록 카드용 짧은 요약 설명 */
     @Column(name = "summary", length = 500)

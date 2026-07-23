@@ -1,4 +1,4 @@
 package com.muyang.server.auth;
 
-public class KaKaoLoginRequest {
+public record KakaoLoginRequest(String accessToken) {
 }

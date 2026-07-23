@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$CONTENT_TITLE · MuYang 관리자">MuYang 관리자</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: {
+                navy: '#1F2A52', 'navy-soft': '#5A6488', cream: '#FBF7EF', paper: '#F4F1EA',
+                line: '#E7E2D6',
+            },
+            fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'] },
+            boxShadow: { card: '0 1px 2px rgba(31,42,82,0.04), 0 8px 24px -12px rgba(31,42,82,0.10)' },
+        } } };
+    </script>
+</head>
+<body class="bg-paper text-navy font-sans antialiased">
+<div class="flex min-h-screen">
+    <!-- 사이드바 -->
+    <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
+
+    <!-- 본문 -->
+    <div class="flex-1 flex flex-col min-w-0">
+        <header class="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-paper/80 px-8 py-4 backdrop-blur">
+            <div>
+                <h1 class="text-xl font-bold tracking-tight" layout:fragment="pageTitle">관리자</h1>
+                <p class="text-xs text-navy-soft mt-0.5" layout:fragment="pageDesc">MuYang 관리자 콘솔</p>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <div class="flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5">
+                    <span class="grid h-6 w-6 place-items-center rounded-full bg-navy text-[11px] font-bold text-cream">A</span>
+                    <span class="font-medium" sec:authentication="name">admin</span>
+                </div>
+                <form th:action="@{/admin/logout}" method="post">
+                    <button class="rounded-full border border-line bg-white px-3.5 py-2 font-medium text-navy-soft transition hover:bg-navy hover:text-cream">
+                        로그아웃
+                    </button>
+                </form>
+            </div>
+        </header>
+        <main class="flex-1 p-8">
+            <div class="mx-auto max-w-6xl" layout:fragment="content"></div>
+        </main>
+    </div>
+</div>
+</body>
+</html>

@@ -27,7 +27,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String grade;
-
     @Column(unique = true)
     private String email;
 
@@ -39,4 +38,6 @@ public class User {
     private Instant createdAt;
     private boolean marketingAgreed;
     private java.time.Instant agreedAt;
+    private String provider;
+    private String providerId;
 }

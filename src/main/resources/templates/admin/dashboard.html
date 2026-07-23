@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head><title>대시보드</title></head>
+<body>
+<h1 layout:fragment="pageTitle">대시보드</h1>
+<p layout:fragment="pageDesc">스토어 현황 한눈에 보기</p>
+
+<div layout:fragment="content">
+    <!-- 통계 카드 -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <a th:href="@{/admin/products}" class="group rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5">
+            <div class="flex items-center justify-between">
+                <span class="grid h-11 w-11 place-items-center rounded-xl bg-indigo-50 text-indigo-500">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/></svg>
+                </span>
+                <span class="text-navy/20 transition group-hover:text-navy/40">→</span>
+            </div>
+            <div class="mt-4 text-3xl font-extrabold" th:text="${productCount}">0</div>
+            <div class="text-sm text-navy-soft">등록 상품</div>
+        </a>
+        <a th:href="@{/admin/orders}" class="group rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5">
+            <div class="flex items-center justify-between">
+                <span class="grid h-11 w-11 place-items-center rounded-xl bg-amber-50 text-amber-500">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                </span>
+                <span class="text-navy/20 transition group-hover:text-navy/40">→</span>
+            </div>
+            <div class="mt-4 text-3xl font-extrabold" th:text="${orderCount}">0</div>
+            <div class="text-sm text-navy-soft">총 주문</div>
+        </a>
+        <a th:href="@{/admin/members}" class="group rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5">
+            <div class="flex items-center justify-between">
+                <span class="grid h-11 w-11 place-items-center rounded-xl bg-emerald-50 text-emerald-500">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                </span>
+                <span class="text-navy/20 transition group-hover:text-navy/40">→</span>
+            </div>
+            <div class="mt-4 text-3xl font-extrabold" th:text="${userCount}">0</div>
+            <div class="text-sm text-navy-soft">가입 회원</div>
+        </a>
+    </div>
+
+    <!-- 최근 주문 -->
+    <div class="mt-7 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+        <div class="flex items-center justify-between border-b border-line px-5 py-4">
+            <h2 class="font-bold">최근 주문</h2>
+            <a th:href="@{/admin/orders}" class="text-sm font-medium text-navy-soft hover:text-navy">전체 보기 →</a>
+        </div>
+        <table class="w-full text-sm">
+            <thead>
+            <tr class="border-b border-line text-left text-xs uppercase tracking-wide text-navy-soft">
+                <th class="px-5 py-3 font-semibold">주문번호</th>
+                <th class="px-5 py-3 font-semibold">회원 ID</th>
+                <th class="px-5 py-3 text-right font-semibold">합계</th>
+                <th class="px-5 py-3 text-center font-semibold">상태</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="o : ${recentOrders}" class="border-b border-line/60 last:border-0 hover:bg-paper/50">
+                <td class="px-5 py-3.5 font-semibold" th:text="'#' + ${o.id}">#1</td>
+                <td class="px-5 py-3.5 text-navy-soft" th:text="${o.userId}">1</td>
+                <td class="px-5 py-3.5 text-right font-medium" th:text="${#numbers.formatInteger(o.total, 0, 'COMMA')} + '원'">0원</td>
+                <td class="px-5 py-3.5 text-center">
+                    <span th:replace="~{fragments/ui :: statusBadge(${o.status})}"></span>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(recentOrders)}">
+                <td colspan="4" class="px-5 py-12 text-center text-navy/35">아직 주문이 없습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

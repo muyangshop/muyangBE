@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 주문 상태 뱃지: 결제완료/배송완료=초록, 배송중=파랑, 취소=회색, 결제대기=앰버 -->
+<span th:fragment="statusBadge(status)"
+      th:with="label=${status == 'PENDING' ? '결제대기' : (status == 'PAID' ? '결제완료' : (status == 'SHIPPING' ? '배송중' : (status == 'DELIVERED' ? '배송완료' : (status == 'CANCELED' ? '취소' : status))))}"
+      th:classappend="${status == 'PAID' or status == 'DELIVERED'} ? 'bg-green-100 text-green-700'
+                       : (${status == 'SHIPPING'} ? 'bg-blue-100 text-blue-700'
+                       : (${status == 'CANCELED'} ? 'bg-zinc-200 text-zinc-600' : 'bg-amber-100 text-amber-700'))"
+      class="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold"
+      th:text="${label}">상태</span>
+</body>
+</html>

@@ -99,6 +99,16 @@ public class DataSeeder implements CommandLineRunner {
                 .onboarded(false)
                 .createdAt(Instant.now())
                 .build());
+        // 관리자 계정 — admin@muyang.com / admin1234 (관리자 페이지 로그인용)
+        userRepository.save(User.builder()
+                .email("admin@muyang.com")
+                .password(passwordEncoder.encode("admin1234"))
+                .name("무양 관리자")
+                .role("ADMIN")
+                .grade("VIP")
+                .onboarded(true)
+                .createdAt(Instant.now())
+                .build());
         // demo 유저의 반려동물
         petRepository.saveAll(List.of(
                 Pet.builder().userId(demo.getId()).name("나비").species("코숏").age(2).build(),

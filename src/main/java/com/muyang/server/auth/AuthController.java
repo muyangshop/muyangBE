@@ -52,4 +52,12 @@ public class AuthController {
     public Map<String, Boolean> checkEmail(@RequestParam String email){
         return Map.of("available", authService.isEmailAvailable(email));
     }
+    @PostMapping("/kakao")
+    public AuthResponse kakaoLogin(@RequestBody KakaoLoginRequest req){
+        return authService.kakaoLogin(req);
+    }
+    @PostMapping("/naver")
+    public AuthResponse naverLogin(@RequestBody NaverLoginRequest req){
+        return authService.naverLogin(req);
+    }
 }

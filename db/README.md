@@ -2,18 +2,19 @@
 
 DBeaver로 스키마를 만들고, Spring Boot를 `postgres` 프로파일로 연결하는 순서입니다.
 
-## 1. PostgreSQL 준비
-설치돼 있지 않다면 Docker가 가장 간단합니다.
+## 1. PostgreSQL 준비 (docker compose — 권장)
+프로젝트 루트(`muyang-server/`)에서:
 
 ```powershell
-docker run --name muyang-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=muyang -p 5432:5432 -d postgres:16
+docker compose up -d      # DB 켜기 (첫 기동 시 schema.sql 자동 실행)
+docker compose down       # 끄기 (데이터 유지)
+docker compose down -v    # 데이터까지 완전 초기화
 ```
 
-이미 로컬에 Postgres가 있다면 `muyang` 데이터베이스만 하나 만들면 됩니다.
+- 데이터는 `muyang-pgdata` 볼륨에 영구 저장돼, 컨테이너를 지워도 유지됩니다.
+- 접속 정보를 바꾸려면 같은 폴더에 `.env`로 `DB_PORT`, `DB_PASSWORD` 등을 지정하세요.
 
-```sql
-CREATE DATABASE muyang;
-```
+> 직접 띄우려면: `docker run --name muyang-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=muyang -p 5432:5432 -d postgres:16`
 
 ## 2. DBeaver 연결
 - 새 연결 → **PostgreSQL**

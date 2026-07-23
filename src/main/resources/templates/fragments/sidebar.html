@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<aside th:fragment="sidebar" class="flex w-64 shrink-0 flex-col bg-navy text-cream">
+    <!-- 브랜드 -->
+    <div class="flex items-center gap-2.5 px-6 py-5">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-cream text-lg">🐾</span>
+        <div>
+            <div class="text-lg font-extrabold leading-none">MuYang</div>
+            <div class="mt-1 text-[11px] font-medium tracking-wide text-cream/45">ADMIN CONSOLE</div>
+        </div>
+    </div>
+
+    <!-- 네비게이션 -->
+    <nav class="flex-1 space-y-1 px-3 py-3 text-sm">
+        <a th:href="@{/admin}"
+           th:classappend="${active == 'dashboard'} ? 'bg-cream/15 text-cream font-semibold' : 'text-cream/65 hover:bg-cream/10 hover:text-cream'"
+           class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition">
+            <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            대시보드
+        </a>
+        <a th:href="@{/admin/products}"
+           th:classappend="${active == 'products'} ? 'bg-cream/15 text-cream font-semibold' : 'text-cream/65 hover:bg-cream/10 hover:text-cream'"
+           class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition">
+            <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.59 13.41 13.42 20.6a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82Z"/><circle cx="7" cy="7" r="1.2" fill="currentColor"/></svg>
+            상품 관리
+        </a>
+        <a th:href="@{/admin/orders}"
+           th:classappend="${active == 'orders'} ? 'bg-cream/15 text-cream font-semibold' : 'text-cream/65 hover:bg-cream/10 hover:text-cream'"
+           class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition">
+            <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            주문 관리
+        </a>
+        <a th:href="@{/admin/members}"
+           th:classappend="${active == 'members'} ? 'bg-cream/15 text-cream font-semibold' : 'text-cream/65 hover:bg-cream/10 hover:text-cream'"
+           class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition">
+            <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            회원 관리
+        </a>
+        <a th:href="@{/admin/banners}"
+           th:classappend="${active == 'banners'} ? 'bg-cream/15 text-cream font-semibold' : 'text-cream/65 hover:bg-cream/10 hover:text-cream'"
+           class="flex items-center gap-3 rounded-xl px-3 py-2.5 transition">
+            <svg class="h-[18px] w-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="m3 14 5-5 4 4 3-3 6 6"/></svg>
+            배너 관리
+        </a>
+    </nav>
+
+    <div class="px-6 py-4 text-[11px] text-cream/35">© 2026 MuYang</div>
+</aside>
+</body>
+</html>

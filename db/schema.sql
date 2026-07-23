@@ -37,7 +37,9 @@ CREATE TABLE users (
     onboarded        BOOLEAN      NOT NULL DEFAULT FALSE,
     marketing_agreed BOOLEAN      NOT NULL DEFAULT FALSE,
     agreed_at        TIMESTAMPTZ,
-    created_at       TIMESTAMPTZ
+    created_at       TIMESTAMPTZ,
+    provider         VARCHAR(255),               -- LOCAL / KAKAO / NAVER (소셜 로그인)
+    provider_id      VARCHAR(255)                -- 소셜 고유 ID (LOCAL이면 NULL)
 );
 COMMENT ON TABLE users IS '회원 계정';
 
@@ -235,3 +237,6 @@ CREATE INDEX idx_reviews_user          ON reviews(user_id);
 CREATE INDEX idx_point_tx_user         ON point_transactions(user_id);
 CREATE INDEX idx_user_coupons_user     ON user_coupons(user_id);
 CREATE INDEX idx_pets_user             ON pets(user_id);
+
+ALTER TABLE skus ADD COLUMN image_url VARCHAR(500);
+ALTER TABLE promos ADD COLUMN image_url VARCHAR(500);

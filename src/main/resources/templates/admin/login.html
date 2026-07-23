@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 · MuYang 관리자</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { navy: '#1F2A52', 'navy-soft': '#5A6488', cream: '#FBF7EF', paper: '#F4F1EA', line: '#E7E2D6' },
+            fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'] },
+        } } };
+    </script>
+</head>
+<body class="font-sans min-h-screen bg-paper flex items-center justify-center p-4">
+<div class="w-full max-w-sm">
+    <!-- 로고 -->
+    <div class="mb-7 text-center">
+        <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-navy text-2xl shadow-lg">🐾</div>
+        <h1 class="mt-3 text-2xl font-extrabold text-navy">MuYang</h1>
+        <p class="mt-1 text-sm text-navy-soft">관리자 콘솔에 로그인하세요</p>
+    </div>
+
+    <form th:action="@{/admin/login}" method="post"
+          class="space-y-4 rounded-2xl border border-line bg-white p-7 shadow-xl shadow-navy/5">
+        <div th:if="${param.error}" class="rounded-xl bg-red-50 px-3.5 py-2.5 text-sm text-red-600">
+            이메일·비밀번호가 올바르지 않거나 관리자 계정이 아닙니다.
+        </div>
+        <div th:if="${param.logout}" class="rounded-xl bg-green-50 px-3.5 py-2.5 text-sm text-green-700">
+            로그아웃되었습니다.
+        </div>
+
+        <label class="block">
+            <span class="mb-1.5 block text-sm font-medium text-navy">이메일</span>
+            <input type="email" name="email" required autofocus placeholder="admin@muyang.com"
+                   class="w-full rounded-xl border border-line bg-paper/40 px-3.5 py-3 text-sm outline-none transition placeholder:text-navy/30 focus:border-navy focus:bg-white"/>
+        </label>
+        <label class="block">
+            <span class="mb-1.5 block text-sm font-medium text-navy">비밀번호</span>
+            <input type="password" name="password" required placeholder="••••••••"
+                   class="w-full rounded-xl border border-line bg-paper/40 px-3.5 py-3 text-sm outline-none transition placeholder:text-navy/30 focus:border-navy focus:bg-white"/>
+        </label>
+
+        <button class="w-full rounded-xl bg-navy py-3 font-semibold text-cream transition hover:opacity-90 active:scale-[0.99]">
+            로그인
+        </button>
+        <p class="text-center text-xs text-navy/35">데모 계정 · admin@muyang.com / admin1234</p>
+    </form>
+</div>
+</body>
+</html>

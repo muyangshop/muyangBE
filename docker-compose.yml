@@ -1,0 +1,27 @@
+# MuYang 로컬 개발용 PostgreSQL
+#   켜기:  docker compose up -d
+#   끄기:  docker compose down        (데이터 유지)
+#   초기화: docker compose down -v     (볼륨까지 삭제)
+services:
+  db:
+    image: postgres:16
+    container_name: muyang-pg
+    environment:
+      POSTGRES_DB: ${DB_NAME:-muyang}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      # 데이터 영구 저장 (컨테이너를 지워도 유지)
+      - muyang-pgdata:/var/lib/postgresql/data
+      # 최초 기동 시(볼륨이 비어있을 때) 스키마 자동 실행
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-muyang}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  muyang-pgdata:
