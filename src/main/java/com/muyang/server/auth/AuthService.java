@@ -73,7 +73,8 @@ public class AuthService {
     public AuthResponse kakaoLogin(KakaoLoginRequest req) {
         KakaoUserInfo info;
         try {
-            info = kakaoClient.getUserInfo(req.accessToken());
+            String accessToken = kakaoClient.getToken(req.code(), req.redirectUri());
+            info = kakaoClient.getUserInfo(accessToken);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "카카오 인증에 실패했습니다");
         }
