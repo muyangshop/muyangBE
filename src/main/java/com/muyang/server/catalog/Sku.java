@@ -28,7 +28,7 @@ public class Sku {
 
     @Id
     private String id;
-
+    private int stock;
     private String name;
     private String cat;
     private String pet;

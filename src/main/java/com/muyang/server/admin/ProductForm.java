@@ -19,6 +19,7 @@ public class ProductForm {
     private String desc;
     private int sortOrder;
     private String imageUrl;
+    private int stock;
 
     public static ProductForm of(Sku s) {
         ProductForm f = new ProductForm();
@@ -35,6 +36,7 @@ public class ProductForm {
         f.desc = s.getDesc();
         f.sortOrder = s.getSortOrder();
         f.imageUrl = s.getImageUrl();
+        f.stock = s.getStock();
         return f;
     }
 
@@ -53,5 +55,6 @@ public class ProductForm {
         s.setDesc(desc);
         s.setSortOrder(sortOrder);
         s.setImageUrl(imageUrl);
+        s.setStock(stock);
     }
 }

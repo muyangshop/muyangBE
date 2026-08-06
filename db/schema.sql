@@ -240,3 +240,4 @@ CREATE INDEX idx_pets_user             ON pets(user_id);
 
 ALTER TABLE skus ADD COLUMN image_url VARCHAR(500);
 ALTER TABLE promos ADD COLUMN image_url VARCHAR(500);
+ALTER TABLE skus ADD COLUMN stock INTEGER NOT NULL DEFAULT 0;

@@ -156,6 +156,7 @@ public class DataSeeder implements CommandLineRunner {
                         attribute("대상", "고양이", 1),
                         attribute("원산지", "대한민국", 2),
                         attribute("배송", "3만원 이상 무료배송", 3)))
+                .stock(100)
                 .build();
     }
     private SkuImage image(String url, ImageType type, int sortOrder, String alt) {
